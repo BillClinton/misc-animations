@@ -1,0 +1,204 @@
+:root {
+  --background-color: #eee;
+  --pot-color: #631d01;
+  --plant-color: #4b3116;
+  --leaf-color: #0a4015;
+  --leaf-size: 6;
+  --scale: 5;
+  --timing: 1;
+}
+body {
+  background-color: var(--background-color);
+}
+#canvas {
+  background-color: var(--background-color);
+  grid-column: 1;
+  grid-row: 1;
+  width: calc(var(--scale) * 100px);
+  height: calc(var(--scale) * 100px);
+  position: relative;
+}
+#top {
+  background-color: var(--pot-color);
+  width: calc(var(--scale) * 30px); /* specify the radius */
+  height: calc(var(--scale) * 6px); /* specify the radius */
+  position: absolute;
+  top: calc(var(--scale) * 68px);
+  left: calc(var(--scale) * 35px);
+}
+#pot {
+  background-color: var(--pot-color);
+  width: calc(var(--scale) * 30px); /* specify the radius */
+  height: calc(var(--scale) * 30px); /* specify the radius */
+  position: absolute;
+  top: calc(var(--scale) * 68px);
+  left: calc(var(--scale) * 35px);
+  clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 20% 100%);
+  cursor: pointer;
+}
+#trunk {
+  background-color: var(--plant-color);
+  width: calc(var(--scale) * 2px); /* specify the radius */
+  height: calc(var(--scale) * 60px); /* specify the radius */
+  position: absolute;
+  top: calc(var(--scale) * 10px);
+  left: calc(var(--scale) * 48px);
+  border-radius: calc(var(--scale) * 2px);
+  transform: scale(0, 0);
+  transform-origin: bottom left;
+}
+.trunk-animation {
+  animation: grow-trunk 1s both;
+}
+.branch {
+  background-color: var(--plant-color);
+  width: calc(var(--scale) * 1px); /* specify the radius */
+  height: calc(var(--scale) * 30px); /* specify the radius */
+  position: absolute;
+  top: calc(var(--scale) * 10px);
+  left: calc(var(--scale) * 48px);
+  border-radius: calc(var(--scale) * 2px);
+  transform: scale(0, 0);
+}
+.branch-right {
+  transform-origin: bottom left;
+}
+.branch-left {
+  transform-origin: bottom right;
+}
+
+#branch01 {
+  height: calc(var(--scale) * 30px);
+  top: calc(var(--scale) * 35px);
+  animation-delay: 0.3s;
+}
+#branch02 {
+  height: calc(var(--scale) * 30px);
+  top: calc(var(--scale) * 30px);
+  animation-delay: 0.5s;
+}
+#branch03 {
+  height: calc(var(--scale) * 26px);
+  top: calc(var(--scale) * 25px);
+  animation-delay: 0.8s;
+}
+#branch04 {
+  height: calc(var(--scale) * 26px);
+  top: calc(var(--scale) * 20px);
+  animation-delay: 1s;
+}
+#branch05 {
+  height: calc(var(--scale) * 22px);
+  top: calc(var(--scale) * 15px);
+  animation-delay: 1.3s;
+}
+#branch06 {
+  height: calc(var(--scale) * 22px); /* specify the radius */
+  top: calc(var(--scale) * 10px);
+  animation-delay: 1.5s;
+}
+#branch07 {
+  height: calc(var(--scale) * 18px); /* specify the radius */
+  top: calc(var(--scale) * 5px);
+  animation-delay: 1.8s;
+}
+#branch08 {
+  height: calc(var(--scale) * 18px); /* specify the radius */
+  top: calc(var(--scale) * 0px);
+  animation-delay: 2s;
+}
+.leaf {
+  background-color: var(--leaf-color);
+  width: calc(var(--scale) * var(--leaf-size) * 1px);
+  height: calc(var(--scale) * var(--leaf-size) * 1px);
+  border-radius: 90% 0;
+  position: absolute;
+  display: none;
+  cursor: pointer;
+}
+.leaf-right {
+  transform-origin: bottom left;
+}
+.leaf-left {
+  transform-origin: bottom right;
+  border-radius: 0 90%;
+}
+
+@keyframes grow-trunk {
+  0% {
+    transform: scale(0, 0) translateY(calc(var(--scale) * 68px));
+  }
+
+  100% {
+    transform: scale(1, 1) translateY(0);
+  }
+}
+@keyframes grow-trunk-reverse {
+  0% {
+    transform: scale(1, 1) translateY(0);
+  }
+  100% {
+    transform: scale(0, 0) translateY(calc(var(--scale) * 68px));
+  }
+}
+@keyframes grow-branch-right {
+  0% {
+    transform: rotate(90deg) scale(0, 0);
+  }
+  100% {
+    transform: rotate(70deg) scale(1, 1);
+  }
+}
+@keyframes grow-branch-left {
+  0% {
+    transform: rotate(270deg) scale(0, 0);
+  }
+  100% {
+    transform: rotate(290deg) scale(1, 1);
+  }
+}
+@keyframes grow-leaf {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes wiggle-leaf1 {
+  to,
+  from {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+}
+@keyframes wiggle-leaf {
+  0%,
+  7% {
+    transform: rotateZ(0);
+  }
+  15% {
+    transform: rotateZ(-13deg);
+  }
+  20% {
+    transform: rotateZ(9deg);
+  }
+  25% {
+    transform: rotateZ(-10deg);
+  }
+  30% {
+    transform: rotateZ(7deg);
+  }
+  35% {
+    transform: rotateZ(-2deg);
+  }
+  40%,
+  100% {
+    transform: rotateZ(0);
+  }
+}
